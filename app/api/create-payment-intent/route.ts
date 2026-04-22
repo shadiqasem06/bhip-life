@@ -1,13 +1,4 @@
 import { NextResponse } from "next/server";
-import Stripe from "stripe";
-
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-
-if (!stripeSecretKey) {
-  throw new Error("Missing STRIPE_SECRET_KEY in .env.local");
-}
-
-const stripe = new Stripe(stripeSecretKey);
 
 type CartItem = {
   id: string;
@@ -19,6 +10,18 @@ type CartItem = {
 
 export async function POST(req: Request) {
   try {
+    const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+
+    if (!stripeSecretKey) {
+      return NextResponse.json(
+        { error: "Payment system not configured yet." },
+        { status: 503 }
+      );
+    }
+
+    const Stripe = (await import("stripe")).default;
+    const stripe = new Stripe(stripeSecretKey);
+
     const { cartItems } = await req.json();
 
     if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
