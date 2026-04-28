@@ -43,10 +43,16 @@ const testimonials = [
   },
 ];
 
+const USD_TO_ILS = 3.7;
+const toILS = (price: string) => {
+  const num = Number(price.replace("$", "").replace("₪", ""));
+  return isNaN(num) ? "" : `₪${Math.round(num * USD_TO_ILS)}`;
+};
+
 const featuredProducts = [
-  { id: 1, name: "B-YNG", price: "₪199", descKey: "productDescB" as const, image: "/products/byng-card.jpg", gradient: "from-red-900/60 via-orange-700/40 to-transparent" },
-  { id: 2, name: "X-GRN", price: "₪149", descKey: "productDescX" as const, image: "/products/xgrn-card.jpg", gradient: "from-emerald-900/60 via-green-700/40 to-transparent" },
-  { id: 3, name: "INDIGO", price: "₪179", descKey: "productDescI" as const, image: "/products/indigo-card.jpg", gradient: "from-indigo-900/60 via-violet-700/40 to-transparent" },
+  { id: 1, name: "B-YNG", price: "$84", descKey: "productDescB" as const, image: "/products/byng-card.jpg", gradient: "from-red-900/60 via-orange-700/40 to-transparent" },
+  { id: 2, name: "X-GRN", price: "$84", descKey: "productDescX" as const, image: "/products/xgrn-card.jpg", gradient: "from-emerald-900/60 via-green-700/40 to-transparent" },
+  { id: 3, name: "INDIGO", price: "$79", descKey: "productDescI" as const, image: "/products/indigo-card.jpg", gradient: "from-indigo-900/60 via-violet-700/40 to-transparent" },
 ];
 
 export default function Home() {
@@ -101,7 +107,10 @@ export default function Home() {
                   <h3 className="font-display text-2xl mb-1">{p.name}</h3>
                   <p className="text-[var(--text-secondary)] text-sm mb-4">{t[p.descKey]}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-lg font-semibold text-[var(--accent)]">{p.price}</span>
+                    <div>
+                      <span className="text-lg font-semibold text-[var(--accent)]">{p.price}</span>
+                      <p className="text-xs text-[var(--text-muted)] mt-0.5">≈ {toILS(p.price)}</p>
+                    </div>
                     <span className="text-sm text-[var(--text-muted)] inline-flex items-center gap-1 group-hover:text-[var(--accent)] transition-colors">
                       {t.viewProduct}
                       <FiArrowRight className={isRtl ? "rtl-flip" : ""} size={14} />
@@ -189,7 +198,8 @@ export default function Home() {
 
 function FeatureCard({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
   return (
-    <div className="card rounded-2xl p-8 text-center">
+    <div className="card rounded-2xl 
+p-8 text-center">
       <div className="w-14 h-14 rounded-full bg-[var(--accent-soft)] text-[var(--accent)] flex items-center justify-center text-2xl mx-auto mb-5">{icon}</div>
       <h3 className="font-display text-xl mb-3">{title}</h3>
       <p className="text-[var(--text-secondary)] leading-relaxed text-sm">{text}</p>

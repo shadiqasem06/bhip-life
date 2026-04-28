@@ -7,6 +7,12 @@ import { FiArrowRight } from "react-icons/fi";
 import { useLanguage } from "../context/language-context";
 import { translations } from "../translations";
 
+const USD_TO_ILS = 3.7;
+const toILS = (price: string) => {
+  const num = Number(price.replace("$", "").replace("₪", ""));
+  return isNaN(num) ? "" : "₪" + Math.round(num * USD_TO_ILS);
+};
+
 type ProductCard = {
   id: number;
   name: string;
@@ -17,30 +23,9 @@ type ProductCard = {
 };
 
 const products: ProductCard[] = [
-  {
-    id: 1,
-    name: "B-YNG",
-    price: "$84",
-    descKey: "productDescB",
-    image: "/products/byng-card.jpg",
-    gradient: "from-red-900/60 via-orange-700/40 to-transparent",
-  },
-  {
-    id: 2,
-    name: "X-GRN",
-    price: "$84",
-    descKey: "productDescX",
-    image: "/products/xgrn-card.jpg",
-    gradient: "from-emerald-900/60 via-green-700/40 to-transparent",
-  },
-  {
-    id: 3,
-    name: "INDIGO",
-    price: "$79",
-    descKey: "productDescI",
-    image: "/products/indigo-card.jpg",
-    gradient: "from-indigo-900/60 via-violet-700/40 to-transparent",
-  },
+  { id: 1, name: "B-YNG", price: "$84", descKey: "productDescB", image: "/products/byng-card.jpg", gradient: "from-red-900/60 via-orange-700/40 to-transparent" },
+  { id: 2, name: "X-GRN", price: "$84", descKey: "productDescX", image: "/products/xgrn-card.jpg", gradient: "from-emerald-900/60 via-green-700/40 to-transparent" },
+  { id: 3, name: "INDIGO", price: "$79", descKey: "productDescI", image: "/products/indigo-card.jpg", gradient: "from-indigo-900/60 via-violet-700/40 to-transparent" },
 ];
 
 function ProductSkeleton() {
@@ -75,56 +60,37 @@ export default function ProductsPage() {
     <main className="min-h-screen px-4 sm:px-6 py-14 md:py-20">
       <section className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)] mb-3">
-            {t.heroEyebrow}
-          </p>
-          <h1 className="font-display text-4xl md:text-6xl mb-4">
-            {t.productsTitle}
-          </h1>
-          <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-            {t.productsSubtitle}
-          </p>
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)] mb-3">{t.heroEyebrow}</p>
+          <h1 className="font-display text-4xl md:text-6xl mb-4">{t.productsTitle}</h1>
+          <p className="text-[var(--text-secondary)] max-w-xl mx-auto">{t.productsSubtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {!loaded
             ? Array.from({ length: 3 }).map((_, i) => <ProductSkeleton key={i} />)
             : products.map((product) => (
-            <Link
-              href={`/products/${product.id}`}
-              key={product.id}
-              className="card card-hover-lift rounded-2xl overflow-hidden block group"
-            >
-              <div className={`relative h-64 bg-gradient-to-br ${product.gradient} overflow-hidden`}>
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)]/60 to-transparent" />
-              </div>
-
-              <div className="p-6">
-                <h2 className="font-display text-2xl mb-1">{product.name}</h2>
-                <p className="text-[var(--text-secondary)] text-sm mb-4">
-                  {t[product.descKey]}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-semibold text-[var(--accent)]">
-                    {product.price}
-                  </span>
-                  <span className="text-sm inline-flex items-center gap-1 text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">
-                    {t.viewProduct}
-                    <FiArrowRight className={isRtl ? "rtl-flip" : ""} size={14} />
-                  </span>
+              <Link href={`/products/${product.id}`} key={product.id} className="card card-hover-lift rounded-2xl overflow-hidden block group">
+                <div className={`relative h-64 bg-gradient-to-br ${product.gradient} overflow-hidden`}>
+                  <Image src={product.image} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)]/60 to-transparent" />
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div className="p-6">
+                  <h2 className="font-display text-2xl mb-1">{product.name}</h2>
+                  <p className="text-[var(--text-secondary)] text-sm mb-4">{t[product.descKey]}</p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-lg font-semibold text-[var(--accent)]">{product.price}</span>
+                      <p className="text-xs text-[var(--text-muted)] mt-0.5">{"≈"} {toILS(product.price)}</p>
+                    </div>
+                    <span className="text-sm inline-flex items-center gap-1 text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">
+                      {t.viewProduct}
+                      <FiArrowRight className={isRtl ? "rtl-flip" : ""} size={14} />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
         </div>
-
       </section>
     </main>
   );
