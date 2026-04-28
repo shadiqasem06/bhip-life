@@ -28,7 +28,7 @@ export default function Navbar() {
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[var(--bg-base)]/85 backdrop-blur-md border-b border-[var(--border)]"
+          ? "bg-[var(--bg-base)]/90 navbar-blur border-b border-[var(--border)]"
           : "bg-transparent border-b border-transparent"
       }`}
     >
@@ -57,16 +57,16 @@ export default function Navbar() {
               {t.products}
             </Link>
             <Link
+              href="/articles"
+              className="hover:text-[var(--accent)] transition-colors"
+            >
+              {t.articles}
+            </Link>
+            <Link
               href="/about"
               className="hover:text-[var(--accent)] transition-colors"
             >
               {t.about}
-            </Link>
-            <Link
-              href="/cart"
-              className="hover:text-[var(--accent)] transition-colors"
-            >
-              {t.cart}
             </Link>
           </div>
         </div>
@@ -155,6 +155,13 @@ export default function Navbar() {
               className="py-3 border-b border-[var(--border)] hover:text-[var(--accent)] transition-colors"
             >
               {t.products}
+            </Link>
+            <Link
+              href="/articles"
+              onClick={() => setMenuOpen(false)}
+              className="py-3 border-b border-[var(--border)] hover:text-[var(--accent)] transition-colors"
+            >
+              {t.articles}
             </Link>
             <Link
               href="/about"

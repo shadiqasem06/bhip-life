@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FiArrowRight } from "react-icons/fi";
@@ -42,13 +43,36 @@ const products: ProductCard[] = [
   },
 ];
 
+function ProductSkeleton() {
+  return (
+    <div className="card rounded-2xl overflow-hidden">
+      <div className="skeleton h-64 w-full" />
+      <div className="p-6 space-y-3">
+        <div className="skeleton h-6 w-1/2 rounded" />
+        <div className="skeleton h-4 w-3/4 rounded" />
+        <div className="skeleton h-4 w-full rounded" />
+        <div className="flex justify-between pt-1">
+          <div className="skeleton h-5 w-16 rounded" />
+          <div className="skeleton h-5 w-20 rounded" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ProductsPage() {
   const { lang } = useLanguage();
   const t = translations[lang];
   const isRtl = lang === "he" || lang === "ar";
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoaded(true), 600);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <main className="min-h-screen px-6 py-20">
+    <main className="min-h-screen px-4 sm:px-6 py-14 md:py-20">
       <section className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)] mb-3">
@@ -63,7 +87,9 @@ export default function ProductsPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
+          {!loaded
+            ? Array.from({ length: 3 }).map((_, i) => <ProductSkeleton key={i} />)
+            : products.map((product) => (
             <Link
               href={`/products/${product.id}`}
               key={product.id}
@@ -98,6 +124,7 @@ export default function ProductsPage() {
             </Link>
           ))}
         </div>
+
       </section>
     </main>
   );

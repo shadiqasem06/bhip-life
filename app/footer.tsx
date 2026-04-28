@@ -91,7 +91,7 @@ export default function Footer() {
           </h3>
           <div className="flex gap-3">
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/bhiplife.fit"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

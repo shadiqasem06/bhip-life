@@ -10,7 +10,7 @@ export default function AboutPage() {
   const t = translations[lang];
 
   return (
-    <main className="min-h-screen px-6 py-20">
+    <main className="min-h-screen px-4 sm:px-6 py-14 md:py-20">
       <section className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)] mb-3">

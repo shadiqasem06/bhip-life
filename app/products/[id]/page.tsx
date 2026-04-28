@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FiArrowLeft, FiCheck, FiShoppingBag } from "react-icons/fi";
+import { FiArrowLeft, FiCheck, FiShoppingBag, FiMinus, FiPlus } from "react-icons/fi";
 import { useCart } from "../../context/cart-context";
 import { useLanguage } from "../../context/language-context";
 import { translations } from "../../translations";
@@ -12,6 +12,7 @@ type Product = {
   id: string;
   name: string;
   price: string;
+  priceNum: number;
   descKey: "productDescB" | "productDescX" | "productDescI";
   longDescKey: "productLongDescB" | "productLongDescX" | "productLongDescI";
   howToKey: "productHowToB" | "productHowToX" | "productHowToI";
@@ -28,6 +29,7 @@ const products: Product[] = [
     id: "1",
     name: "B-YNG",
     price: "₪199",
+    priceNum: 199,
     descKey: "productDescB",
     longDescKey: "productLongDescB",
     howToKey: "productHowToB",
@@ -42,6 +44,7 @@ const products: Product[] = [
     id: "2",
     name: "X-GRN",
     price: "₪149",
+    priceNum: 149,
     descKey: "productDescX",
     longDescKey: "productLongDescX",
     howToKey: "productHowToX",
@@ -56,6 +59,7 @@ const products: Product[] = [
     id: "3",
     name: "INDIGO",
     price: "₪179",
+    priceNum: 179,
     descKey: "productDescI",
     longDescKey: "productLongDescI",
     howToKey: "productHowToI",
@@ -68,6 +72,28 @@ const products: Product[] = [
   },
 ];
 
+/* ── Stock counter per product (stable seed) ── */
+const stockCounts: Record<string, number> = { "1": 7, "2": 12, "3": 5 };
+
+type TabKey = "details" | "benefits" | "ingredients";
+
+const tabLabels: Record<string, Record<TabKey, string>> = {
+  en: { details: "Details", benefits: "Benefits", ingredients: "Ingredients" },
+  he: { details: "פרטים", benefits: "יתרונות", ingredients: "רכיבים" },
+  ar: { details: "التفاصيل", benefits: "الفوائد", ingredients: "المكونات" },
+};
+
+const stockLabels: Record<string, string> = {
+  en: "🔥 Only",
+  he: "🔥 נותרו רק",
+  ar: "🔥 تبقى فقط",
+};
+const stockSuffixLabels: Record<string, string> = {
+  en: "left in stock",
+  he: "יחידות במלאי",
+  ar: "في المخزون",
+};
+
 export default function ProductPage({
   params,
 }: {
@@ -75,10 +101,13 @@ export default function ProductPage({
 }) {
   const [product, setProduct] = useState<Product | null>(null);
   const [added, setAdded] = useState(false);
+  const [qty, setQty] = useState(1);
+  const [activeTab, setActiveTab] = useState<TabKey>("details");
   const { updateCartCount } = useCart();
   const { lang } = useLanguage();
   const t = translations[lang];
   const isRtl = lang === "he" || lang === "ar";
+  const tabs = tabLabels[lang] ?? tabLabels.en;
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -104,14 +133,14 @@ export default function ProductPage({
     const index = cart.findIndex((item) => item.id === product.id);
 
     if (index !== -1) {
-      cart[index].quantity += 1;
+      cart[index].quantity += qty;
     } else {
       cart.push({
         id: product.id,
         name: product.name,
         price: product.price,
         description: t[product.descKey],
-        quantity: 1,
+        quantity: qty,
       });
     }
 
@@ -136,9 +165,10 @@ export default function ProductPage({
 
   const benefits: string[] = t[product.benefitsKey] as unknown as string[];
   const ingredients: string[] = t[product.ingredientsKey] as unknown as string[];
+  const totalPrice = `₪${product.priceNum * qty}`;
 
   return (
-    <main className="min-h-screen px-6 py-16">
+    <main className="min-h-screen px-4 sm:px-6 py-12 md:py-16">
       <section className="max-w-5xl mx-auto">
         <Link
           href="/products"
@@ -150,7 +180,7 @@ export default function ProductPage({
 
         <div className="grid md:grid-cols-2 gap-10 items-start">
           {/* Product image */}
-          <div className={`relative h-[420px] rounded-2xl overflow-hidden bg-gradient-to-br ${product.gradient}`}>
+          <div className={`relative h-[260px] sm:h-[340px] md:h-[420px] rounded-2xl overflow-hidden bg-gradient-to-br ${product.gradient}`}>
             <Image
               src={product.image}
               alt={product.name}
@@ -170,35 +200,69 @@ export default function ProductPage({
             <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)] mb-3">
               {product.tag}
             </p>
-            <h1 className="font-display text-4xl md:text-5xl mb-4">
+            <h1 className="font-display text-4xl md:text-5xl mb-3">
               {product.name}
             </h1>
-            <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-              {t[product.longDescKey]}
-            </p>
 
-            <div className="divider-gold mb-6" />
+            {/* Stock counter */}
+            <div className="flex items-center gap-2 mb-5">
+              <span className="text-sm font-medium text-[var(--danger)]">
+                {stockLabels[lang] ?? stockLabels.en}
+              </span>
+              <span className="inline-block min-w-[2rem] text-center text-sm font-bold bg-[var(--danger)]/10 text-[var(--danger)] border border-[var(--danger)]/30 rounded px-2 py-0.5">
+                {product ? stockCounts[product.id] ?? 8 : 8}
+              </span>
+              <span className="text-sm font-medium text-[var(--danger)]">
+                {stockSuffixLabels[lang] ?? stockSuffixLabels.en}
+              </span>
+            </div>
 
-            <p className="text-3xl font-semibold text-[var(--accent)] mb-8">
-              {product.price}
-            </p>
+            <div className="divider-gold mb-5" />
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+            {/* Price */}
+            <div className="flex items-baseline gap-3 mb-6">
+              <p className="text-3xl font-semibold text-[var(--accent)]">
+                {qty > 1 ? totalPrice : product.price}
+              </p>
+              {qty > 1 && (
+                <span className="text-sm text-[var(--text-muted)]">
+                  ({product.price} × {qty})
+                </span>
+              )}
+            </div>
+
+            {/* Quantity selector */}
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-sm text-[var(--text-muted)]">{t.quantity}:</span>
+              <div className="flex items-center border border-[var(--border-strong)] rounded-full overflow-hidden">
+                <button
+                  onClick={() => setQty((q) => Math.max(1, q - 1))}
+                  className="w-9 h-9 flex items-center justify-center hover:bg-[var(--bg-elevated)] transition-colors text-[var(--text-secondary)]"
+                  aria-label="Decrease quantity"
+                >
+                  <FiMinus size={14} />
+                </button>
+                <span className="w-10 text-center text-sm font-semibold tabular-nums">
+                  {qty}
+                </span>
+                <button
+                  onClick={() => setQty((q) => Math.min(10, q + 1))}
+                  className="w-9 h-9 flex items-center justify-center hover:bg-[var(--bg-elevated)] transition-colors text-[var(--text-secondary)]"
+                  aria-label="Increase quantity"
+                >
+                  <FiPlus size={14} />
+                </button>
+              </div>
+            </div>
+
+            {/* CTA buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
               <button
                 onClick={() => addToCart(false)}
                 className="btn-outline px-6 py-3 rounded-full inline-flex items-center justify-center gap-2"
               >
-                {added ? (
-                  <>
-                    <FiCheck />
-                    <span>{t.addToCart}</span>
-                  </>
-                ) : (
-                  <>
-                    <FiShoppingBag />
-                    <span>{t.addToCart}</span>
-                  </>
-                )}
+                {added ? <FiCheck /> : <FiShoppingBag />}
+                <span>{t.addToCart}</span>
               </button>
 
               <button
@@ -217,39 +281,61 @@ export default function ProductPage({
           </div>
         </div>
 
-        {/* Benefits + Ingredients */}
-        <div className="grid md:grid-cols-2 gap-8 mt-14">
-          {/* Key benefits */}
-          <div className="card rounded-2xl p-6">
-            <h2 className="font-display text-2xl mb-5 text-[var(--accent)]">
-              {t.keyBenefits}
-            </h2>
-            <ul className="space-y-3">
-              {benefits.map((b, i) => (
-                <li key={i} className="flex items-start gap-3 text-[var(--text-secondary)] text-sm">
-                  <span className="text-[var(--accent)] mt-0.5 shrink-0">✓</span>
-                  {b}
-                </li>
-              ))}
-            </ul>
+        {/* ── Tabs: Details / Benefits / Ingredients ── */}
+        <div className="mt-14">
+          {/* Tab headers */}
+          <div className="flex border-b border-[var(--border)] mb-8">
+            {(["details", "benefits", "ingredients"] as TabKey[]).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-3 sm:px-6 py-3 text-sm font-medium flex-1 text-center transition-colors border-b-2 -mb-px ${
+                  activeTab === tab
+                    ? "border-[var(--accent)] text-[var(--accent)]"
+                    : "border-transparent text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
+                }`}
+              >
+                {tabs[tab]}
+              </button>
+            ))}
           </div>
 
-          {/* Ingredients */}
-          <div className="card rounded-2xl p-6">
-            <h2 className="font-display text-2xl mb-5 text-[var(--accent)]">
-              {t.ingredients}
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {ingredients.map((ing, i) => (
-                <span
-                  key={i}
-                  className="text-xs bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-secondary)] px-3 py-1.5 rounded-full"
-                >
-                  {ing}
-                </span>
-              ))}
+          {/* Tab content */}
+          {activeTab === "details" && (
+            <div className="card rounded-2xl p-7">
+              <p className="text-[var(--text-secondary)] leading-relaxed">
+                {t[product.longDescKey]}
+              </p>
             </div>
-          </div>
+          )}
+
+          {activeTab === "benefits" && (
+            <div className="card rounded-2xl p-7">
+              <ul className="space-y-4">
+                {benefits.map((b, i) => (
+                  <li key={i} className="flex items-start gap-3 text-[var(--text-secondary)] text-sm">
+                    <span className="text-[var(--accent)] mt-0.5 shrink-0 text-base">✓</span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {activeTab === "ingredients" && (
+            <div className="card rounded-2xl p-7">
+              <div className="flex flex-wrap gap-2">
+                {ingredients.map((ing, i) => (
+                  <span
+                    key={i}
+                    className="text-xs bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-secondary)] px-3 py-1.5 rounded-full"
+                  >
+                    {ing}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </main>

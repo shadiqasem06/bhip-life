@@ -141,6 +141,22 @@ export const translations = {
     promoInvalid: "Invalid promo code.",
     promoLabel: "Promo code discount",
 
+    // Articles
+    articles: "Articles",
+    articlesEyebrow: "Wellness & Health",
+    articlesTitle: "Knowledge is Power",
+    articlesSubtitle: "Deep dives into the ingredients that make our products work.",
+    articlesFilterAll: "All",
+    articlesReadMore: "Read Article",
+    articlesReadTime: "min read",
+    articlesRelatedProduct: "Explore the product",
+    articlesBenefits: "The Benefits",
+    articlesHowTo: "How to Use",
+
+    // Testimonials
+    testimonialsTitle: "What our customers say",
+    testimonialsEyebrow: "Reviews",
+
     // Product short descriptions (cards)
     productDescB: "Beauty from within — collagen, vitamins & minerals for hair, skin & nails",
     productDescX: "Daily greens blend with spirulina, matcha & B vitamins for energy & detox",
@@ -340,6 +356,22 @@ export const translations = {
     promoInvalid: "קוד קופון לא תקין.",
     promoLabel: "הנחת קופון",
 
+    // Articles
+    articles: "מאמרים",
+    articlesEyebrow: "בריאות ואיכות חיים",
+    articlesTitle: "ידע זה כוח",
+    articlesSubtitle: "מידע מעמיק על הרכיבים שהופכים את המוצרים שלנו לעובדים.",
+    articlesFilterAll: "הכל",
+    articlesReadMore: "קרא מאמר",
+    articlesReadTime: "דק' קריאה",
+    articlesRelatedProduct: "לעמוד המוצר",
+    articlesBenefits: "היתרונות",
+    articlesHowTo: "כיצד להשתמש",
+
+    // Testimonials
+    testimonialsTitle: "מה הלקוחות שלנו אומרים",
+    testimonialsEyebrow: "ביקורות",
+
     // Product short descriptions (cards)
     productDescB: "יופי מבפנים — קולגן, ויטמינים ומינרלים לשיער, עור וציפורניים",
     productDescX: "תמהיל ירוקים יומי עם ספירולינה, מאצ'ה וויטמיני B לאנרגיה וניקוי",
@@ -538,6 +570,22 @@ export const translations = {
     promoApplied: "تم تطبيق كود الخصم بنجاح!",
     promoInvalid: "كود الخصم غير صالح.",
     promoLabel: "خصم الكود",
+
+    // Articles
+    articles: "مقالات",
+    articlesEyebrow: "الصحة والعافية",
+    articlesTitle: "المعرفة قوة",
+    articlesSubtitle: "معلومات معمّقة عن المكونات التي تجعل منتجاتنا فعّالة.",
+    articlesFilterAll: "الكل",
+    articlesReadMore: "اقرأ المقال",
+    articlesReadTime: "دقيقة قراءة",
+    articlesRelatedProduct: "استكشف المنتج",
+    articlesBenefits: "الفوائد",
+    articlesHowTo: "طريقة الاستخدام",
+
+    // Testimonials
+    testimonialsTitle: "ماذا يقول عملاؤنا",
+    testimonialsEyebrow: "التقييمات",
 
     // Product short descriptions (cards)
     productDescB: "جمال من الداخل — كولاجين، فيتامينات ومعادن للشعر والبشرة والأظافر",
