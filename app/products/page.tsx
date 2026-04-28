@@ -20,7 +20,7 @@ const products: ProductCard[] = [
   {
     id: 1,
     name: "B-YNG",
-    price: "₪199",
+    price: "$84",
     descKey: "productDescB",
     image: "/products/byng-card.jpg",
     gradient: "from-red-900/60 via-orange-700/40 to-transparent",
@@ -28,7 +28,7 @@ const products: ProductCard[] = [
   {
     id: 2,
     name: "X-GRN",
-    price: "₪149",
+    price: "$84",
     descKey: "productDescX",
     image: "/products/xgrn-card.jpg",
     gradient: "from-emerald-900/60 via-green-700/40 to-transparent",
@@ -36,7 +36,7 @@ const products: ProductCard[] = [
   {
     id: 3,
     name: "INDIGO",
-    price: "₪179",
+    price: "$79",
     descKey: "productDescI",
     image: "/products/indigo-card.jpg",
     gradient: "from-indigo-900/60 via-violet-700/40 to-transparent",

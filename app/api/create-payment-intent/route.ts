@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
     const amount = cartItems.reduce((total: number, item: CartItem) => {
       const quantity = item.quantity || 1;
-      const price = Number(String(item.price).replace("₪", ""));
+      const price = Number(String(item.price).replace("₪", "").replace("$", ""));
       return total + price * quantity;
     }, 0);
 

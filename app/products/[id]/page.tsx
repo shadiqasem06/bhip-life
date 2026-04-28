@@ -28,8 +28,8 @@ const products: Product[] = [
   {
     id: "1",
     name: "B-YNG",
-    price: "₪199",
-    priceNum: 199,
+    price: "$84",
+    priceNum: 84,
     descKey: "productDescB",
     longDescKey: "productLongDescB",
     howToKey: "productHowToB",
@@ -43,8 +43,8 @@ const products: Product[] = [
   {
     id: "2",
     name: "X-GRN",
-    price: "₪149",
-    priceNum: 149,
+    price: "$84",
+    priceNum: 84,
     descKey: "productDescX",
     longDescKey: "productLongDescX",
     howToKey: "productHowToX",
@@ -58,8 +58,8 @@ const products: Product[] = [
   {
     id: "3",
     name: "INDIGO",
-    price: "₪179",
-    priceNum: 179,
+    price: "$79",
+    priceNum: 79,
     descKey: "productDescI",
     longDescKey: "productLongDescI",
     howToKey: "productHowToI",
@@ -165,7 +165,7 @@ export default function ProductPage({
 
   const benefits: string[] = t[product.benefitsKey] as unknown as string[];
   const ingredients: string[] = t[product.ingredientsKey] as unknown as string[];
-  const totalPrice = `₪${product.priceNum * qty}`;
+  const totalPrice = `$${product.priceNum * qty}`;
 
   return (
     <main className="min-h-screen px-4 sm:px-6 py-12 md:py-16">
