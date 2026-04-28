@@ -196,7 +196,3 @@ function FeatureCard({ icon, title, text }: { icon: React.ReactNode; title: stri
     </div>
   );
 }
-text-sm">{text}</p>
-    </div>
-  );
-}
