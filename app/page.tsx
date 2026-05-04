@@ -6,6 +6,7 @@ import { FiArrowRight, FiShield, FiTruck, FiAward } from "react-icons/fi";
 import { useLanguage } from "./context/language-context";
 import { translations } from "./translations";
 import ScrollReveal from "./scroll-reveal";
+import { useExchangeRate } from "./hooks/useExchangeRate";
 
 const testimonials = [
   {
@@ -43,12 +44,6 @@ const testimonials = [
   },
 ];
 
-const USD_TO_ILS = 3.7;
-const toILS = (price: string) => {
-  const num = Number(price.replace("$", "").replace("₪", ""));
-  return isNaN(num) ? "" : `₪${Math.round(num * USD_TO_ILS)}`;
-};
-
 const featuredProducts = [
   { id: 1, name: "B-YNG", price: "$84", descKey: "productDescB" as const, image: "/products/byng-card.jpg", gradient: "from-red-900/60 via-orange-700/40 to-transparent" },
   { id: 2, name: "X-GRN", price: "$84", descKey: "productDescX" as const, image: "/products/xgrn-card.jpg", gradient: "from-emerald-900/60 via-green-700/40 to-transparent" },
@@ -59,6 +54,7 @@ export default function Home() {
   const { lang } = useLanguage();
   const t = translations[lang];
   const isRtl = lang === "he" || lang === "ar";
+  const { toILS } = useExchangeRate();
 
   return (
     <main>
@@ -109,7 +105,7 @@ export default function Home() {
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-lg font-semibold text-[var(--accent)]">{p.price}</span>
-                      <p className="text-xs text-[var(--text-muted)] mt-0.5">≈ {toILS(p.price)}</p>
+                      <p className="text-xs text-[var(--text-muted)] mt-0.5">≈ {toILS(Number(p.price.replace("$", "")))}</p>
                     </div>
                     <span className="text-sm text-[var(--text-muted)] inline-flex items-center gap-1 group-hover:text-[var(--accent)] transition-colors">
                       {t.viewProduct}

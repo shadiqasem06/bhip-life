@@ -56,6 +56,12 @@ export default function Footer() {
             >
               {t.about}
             </Link>
+            <Link
+              href="/refund-policy"
+              className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+            >
+              {t.refundPolicyNav}
+            </Link>
           </div>
         </div>
 

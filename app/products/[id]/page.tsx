@@ -7,9 +7,7 @@ import { FiArrowLeft, FiCheck, FiShoppingBag, FiMinus, FiPlus } from "react-icon
 import { useCart } from "../../context/cart-context";
 import { useLanguage } from "../../context/language-context";
 import { translations } from "../../translations";
-
-const USD_TO_ILS = 3.7;
-const toILS = (usd: number) => "₪" + Math.round(usd * USD_TO_ILS);
+import { useExchangeRate } from "../../hooks/useExchangeRate";
 
 type Product = {
   id: string;
@@ -33,21 +31,21 @@ const products: Product[] = [
     descKey: "productDescB", longDescKey: "productLongDescB", howToKey: "productHowToB",
     benefitsKey: "productBenefitsB", ingredientsKey: "productIngredientsB",
     image: "/products/byng.jpg", cardImage: "/products/byng-card.jpg",
-    gradient: "from-red-900/60 via-orange-700/40 to-transparent", tag: "BEAUTY · HAIR · SKIN · NAILS",
+    gradient: "from-red-900/60 via-orange-700/40 to-transparent", tag: "BEAUTY - HAIR - SKIN - NAILS",
   },
   {
     id: "2", name: "X-GRN", price: "$84", priceNum: 84,
     descKey: "productDescX", longDescKey: "productLongDescX", howToKey: "productHowToX",
     benefitsKey: "productBenefitsX", ingredientsKey: "productIngredientsX",
     image: "/products/xgrn.jpg", cardImage: "/products/xgrn-card.jpg",
-    gradient: "from-emerald-900/60 via-green-700/40 to-transparent", tag: "HEALTH · DETOX · GUT · ENERGY",
+    gradient: "from-emerald-900/60 via-green-700/40 to-transparent", tag: "HEALTH - DETOX - GUT - ENERGY",
   },
   {
     id: "3", name: "INDIGO", price: "$79", priceNum: 79,
     descKey: "productDescI", longDescKey: "productLongDescI", howToKey: "productHowToI",
     benefitsKey: "productBenefitsI", ingredientsKey: "productIngredientsI",
     image: "/products/indigo.jpg", cardImage: "/products/indigo-card.jpg",
-    gradient: "from-indigo-900/60 via-violet-700/40 to-transparent", tag: "ENERGY · FOCUS · VITALITY",
+    gradient: "from-indigo-900/60 via-violet-700/40 to-transparent", tag: "ENERGY - FOCUS - VITALITY",
   },
 ];
 
@@ -61,7 +59,7 @@ const tabLabels: Record<string, Record<TabKey, string>> = {
   ar: { details: "التفاصيل", benefits: "الفوائد", ingredients: "المكونات" },
 };
 
-const stockLabels: Record<string, string> = { en: "🔥 Only", he: "🔥 נותרו רק", ar: "🔥 تبقى فقط" };
+const stockLabels: Record<string, string> = { en: "Only", he: "נותרו רק", ar: "تبقى فقط" };
 const stockSuffixLabels: Record<string, string> = { en: "left in stock", he: "יחידות במלאי", ar: "في المخزون" };
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
@@ -74,6 +72,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const t = translations[lang];
   const isRtl = lang === "he" || lang === "ar";
   const tabs = tabLabels[lang] ?? tabLabels.en;
+  const { toILS } = useExchangeRate();
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -135,7 +134,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             {/* Stock counter */}
             <div className="flex items-center gap-2 mb-5">
-              <span className="text-sm font-medium text-[var(--danger)]">{stockLabels[lang] ?? stockLabels.en}</span>
+              <span className="text-sm font-medium text-[var(--danger)]">{"🔥 " + (stockLabels[lang] ?? stockLabels.en)}</span>
               <span className="inline-block min-w-[2rem] text-center text-sm font-bold bg-[var(--danger)]/10 text-[var(--danger)] border border-[var(--danger)]/30 rounded px-2 py-0.5">
                 {stockCounts[product.id] ?? 8}
               </span>
@@ -150,7 +149,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 <p className="text-3xl font-semibold text-[var(--accent)]">{qty > 1 ? totalPrice : product.price}</p>
                 {qty > 1 && <span className="text-sm text-[var(--text-muted)]">({product.price} x {qty})</span>}
               </div>
-              <p className="text-sm text-[var(--text-muted)] mt-1">{"≈"} {toILS(product.priceNum * qty)}</p>
+              <p className="text-sm text-[var(--text-muted)] mt-1">{"~ " + toILS(product.priceNum * qty)}</p>
             </div>
 
             {/* Quantity */}
@@ -204,7 +203,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <ul className="space-y-4">
                 {benefits.map((b, i) => (
                   <li key={i} className="flex items-start gap-3 text-[var(--text-secondary)] text-sm">
-                    <span className="text-[var(--accent)] mt-0.5 shrink-0 text-base">✓</span>
+                    <span className="text-[var(--accent)] mt-0.5 shrink-0 text-base">{"✓"}</span>
                     {b}
                   </li>
                 ))}

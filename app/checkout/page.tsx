@@ -21,6 +21,8 @@ const PROMO_CODES: Record<string, number> = {
   bhip10: 0.10, bhip20: 0.20, save15: 0.15,
 };
 
+const parsePrice = (price: string) => Number(price.replace("$", "").replace("₪", "")) || 0;
+
 export default function CheckoutPage() {
   const [cartItems, setCartItems] = useState<Product[]>([]);
   const [step, setStep] = useState<"details" | "payment">("details");
@@ -60,14 +62,13 @@ export default function CheckoutPage() {
 
   const subtotal = useMemo(() => {
     return cartItems.reduce((total, item) => {
-      const qty = item.quantity || 1;
-      return total + Number(item.price.replace("\u20aa", "").replace("$", "")) * qty;
+      return total + parsePrice(item.price) * (item.quantity || 1);
     }, 0);
   }, [cartItems]);
 
-  const discountAmount = hasDiscount ? Math.round(subtotal * DISCOUNT * 100) / 100 : 0;
-  const promoAmount = appliedPromo ? Math.round(subtotal * appliedPromo.rate * 100) / 100 : 0;
-  const totalPrice = Math.round((subtotal - discountAmount - promoAmount) * 100) / 100;
+  const discountAmount = hasDiscount ? Math.round(subtotal * DISCOUNT) : 0;
+  const promoAmount = appliedPromo ? Math.round(subtotal * appliedPromo.rate) : 0;
+  const totalPrice = Math.round(subtotal - discountAmount - promoAmount);
 
   const applyPromo = () => {
     setPromoError("");
@@ -83,8 +84,8 @@ export default function CheckoutPage() {
   const proceedToPayment = async () => {
     if (!fullName.trim() || !email.trim() || !phone.trim()) {
       setPaymentError(
-        lang === "he" ? "\u05e0\u05d0 \u05dc\u05de\u05dc\u05d0 \u05e9\u05dd, \u05d0\u05d9\u05de\u05d9\u05d9\u05dc \u05d5\u05d8\u05dc\u05e4\u05d5\u05df" :
-        lang === "ar" ? "\u064a\u0631\u062c\u0649 \u0645\u0644\u0621 \u0627\u0644\u0627\u0633\u0645 \u0648\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a \u0648\u0627\u0644\u0647\u0627\u062a\u0641" :
+        lang === "he" ? "נא למלא שם, אימייל וטלפון" :
+        lang === "ar" ? "يرجى ملء الاسم والبريد الإلكتروني والهاتف" :
         "Please fill in name, email and phone"
       );
       return;
@@ -131,27 +132,14 @@ export default function CheckoutPage() {
             <div className="flex items-center gap-2 px-6 py-4 border-b border-[var(--border)]">
               <FiLock className="text-[var(--accent)]" size={15} />
               <span className="text-sm font-medium">
-                {lang === "he" ? "\u05ea\u05e9\u05dc\u05d5\u05dd \u05de\u05d0\u05d5\u05d1\u05d8\u05d7" : lang === "ar" ? "\u062f\u0641\u0639 \u0622\u0645\u0646" : "Secure Payment"}
+                {lang === "he" ? "תשלום מאובטח" : lang === "ar" ? "دفع آمن" : "Secure Payment"}
               </span>
-              <span className="ms-auto text-xs text-[var(--text-muted)]">
-                Total: ${totalPrice}
-              </span>
+              <span className="ms-auto text-xs text-[var(--text-muted)]">Total: ${totalPrice}</span>
             </div>
-            <iframe
-              src={iframeUrl}
-              width="100%"
-              height="520"
-              frameBorder="0"
-              title="Tranzila Secure Payment"
-              className="block"
-              allow="payment"
-            />
+            <iframe src={iframeUrl} width="100%" height="520" frameBorder="0" title="Tranzila Secure Payment" className="block" allow="payment" />
             <div className="px-6 py-3 border-t border-[var(--border)] flex justify-center">
-              <button
-                onClick={() => setStep("details")}
-                className="text-xs text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
-              >
-                {lang === "he" ? "\u2190 \u05d7\u05d6\u05e8\u05d4 \u05dc\u05e4\u05e8\u05d8\u05d9\u05dd" : lang === "ar" ? "\u2190 \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644" : "\u2190 Back to details"}
+              <button onClick={() => setStep("details")} className="text-xs text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
+                {lang === "he" ? "← חזרה לפרטים" : lang === "ar" ? "← العودة إلى التفاصيل" : "← Back to details"}
               </button>
             </div>
           </div>
@@ -188,15 +176,24 @@ export default function CheckoutPage() {
                 <p className="text-[var(--text-muted)]">{t.emptyCart}</p>
               ) : (
                 <div>
+                  {/* Line items */}
                   <div className="space-y-3 mb-5">
-                    {cartItems.map((item, i) => (
-                      <div key={i} className="flex justify-between items-baseline border-b border-[var(--border)] pb-3">
-                        <p className="font-semibold truncate min-w-0">{item.name}{item.quantity ? " x " + item.quantity : ""}</p>
-                        <p className="text-[var(--text-secondary)] shrink-0 ms-4">{item.price}</p>
-                      </div>
-                    ))}
+                    {cartItems.map((item, i) => {
+                      const qty = item.quantity || 1;
+                      const lineTotal = Math.round(parsePrice(item.price) * qty);
+                      return (
+                        <div key={i} className="flex justify-between items-start border-b border-[var(--border)] pb-3">
+                          <div className="min-w-0">
+                            <p className="font-semibold truncate">{item.name}{qty > 1 ? " x" + qty : ""}</p>
+                            {qty > 1 && <p className="text-xs text-[var(--text-muted)]">{item.price} {lang === "he" ? "ליחידה" : lang === "ar" ? "للوحدة" : "each"}</p>}
+                          </div>
+                          <p className="text-[var(--text-secondary)] shrink-0 ms-4 font-medium">${lineTotal}</p>
+                        </div>
+                      );
+                    })}
                   </div>
 
+                  {/* Promo code */}
                   <div className="mb-4">
                     <p className="text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2">{t.promoCode}</p>
                     {appliedPromo ? (
@@ -213,14 +210,13 @@ export default function CheckoutPage() {
                         <button onClick={applyPromo} disabled={!promoInput.trim()} className="btn-outline px-4 py-2.5 rounded-xl text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap">{t.promoApply}</button>
                       </div>
                     )}
-                    {promoError && (
-                      <p className="text-[var(--danger)] text-xs mt-1.5 flex items-center gap-1"><FiX size={12} /> {promoError}</p>
-                    )}
+                    {promoError && <p className="text-[var(--danger)] text-xs mt-1.5 flex items-center gap-1"><FiX size={12} /> {promoError}</p>}
                   </div>
 
+                  {/* Breakdown */}
                   {(hasDiscount || appliedPromo) && (
                     <div className="space-y-1.5 mb-3 text-sm">
-                      <div className="flex justify-between text-[var(--text-secondary)]"><span>{t.orderSummary}</span><span>${subtotal}</span></div>
+                      <div className="flex justify-between text-[var(--text-secondary)]"><span>{t.orderSummary}</span><span>${Math.round(subtotal)}</span></div>
                       {hasDiscount && <div className="flex justify-between text-[var(--success)]"><span>{t.discountLabel}</span><span>-${discountAmount}</span></div>}
                       {appliedPromo && <div className="flex justify-between text-[var(--success)]"><span>{t.promoLabel} ({appliedPromo.code})</span><span>-${promoAmount}</span></div>}
                     </div>
@@ -233,23 +229,17 @@ export default function CheckoutPage() {
 
                   <div className="divider-gold mb-6" />
 
-                  {paymentError && (
-                    <p className="text-[var(--danger)] text-sm mb-4 flex items-center gap-1"><FiX size={13} /> {paymentError}</p>
-                  )}
+                  {paymentError && <p className="text-[var(--danger)] text-sm mb-4 flex items-center gap-1"><FiX size={13} /> {paymentError}</p>}
 
-                  <button
-                    onClick={proceedToPayment}
-                    disabled={loadingPayment || cartItems.length === 0}
-                    className="btn-primary w-full py-3 rounded-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
+                  <button onClick={proceedToPayment} disabled={loadingPayment || cartItems.length === 0} className="btn-primary w-full py-3 rounded-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
                     <FiLock size={15} />
-                    <span>{loadingPayment ? (lang === "he" ? "\u05d8\u05d5\u05e2\u05df..." : lang === "ar" ? "\u062c\u0627\u0631 \u0627\u0644\u062a\u062d\u0645\u064a\u0644..." : "Loading...") : t.payNow}</span>
+                    <span>{loadingPayment ? (lang === "he" ? "טוען..." : lang === "ar" ? "جارٍ التحميل..." : "Loading...") : t.payNow}</span>
                     {!loadingPayment && <FiArrowRight size={15} className={isRtl ? "rtl-flip" : ""} />}
                   </button>
 
                   <p className="text-center text-xs text-[var(--text-muted)] mt-3 flex items-center justify-center gap-1">
                     <FiLock size={11} />
-                    {lang === "he" ? "\u05ea\u05e9\u05dc\u05d5\u05dd \u05de\u05d0\u05d5\u05d1\u05d8\u05d7 \u05d3\u05e8\u05da Tranzila" : lang === "ar" ? "\u062f\u0641\u0639 \u0622\u0645\u0646 \u0639\u0628\u0631 Tranzila" : "Secured by Tranzila"}
+                    {lang === "he" ? "תשלום מאובטח דרך Tranzila" : lang === "ar" ? "دفع آمن عبر Tranzila" : "Secured by Tranzila"}
                   </p>
                 </div>
               )}

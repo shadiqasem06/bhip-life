@@ -6,12 +6,7 @@ import Image from "next/image";
 import { FiArrowRight } from "react-icons/fi";
 import { useLanguage } from "../context/language-context";
 import { translations } from "../translations";
-
-const USD_TO_ILS = 3.7;
-const toILS = (price: string) => {
-  const num = Number(price.replace("$", "").replace("₪", ""));
-  return isNaN(num) ? "" : "₪" + Math.round(num * USD_TO_ILS);
-};
+import { useExchangeRate } from "../hooks/useExchangeRate";
 
 type ProductCard = {
   id: number;
@@ -50,6 +45,7 @@ export default function ProductsPage() {
   const t = translations[lang];
   const isRtl = lang === "he" || lang === "ar";
   const [loaded, setLoaded] = useState(false);
+  const { toILS, rate } = useExchangeRate();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 600);
@@ -80,7 +76,7 @@ export default function ProductsPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-lg font-semibold text-[var(--accent)]">{product.price}</span>
-                      <p className="text-xs text-[var(--text-muted)] mt-0.5">{"≈"} {toILS(product.price)}</p>
+                      <p className="text-xs text-[var(--text-muted)] mt-0.5">≈ {toILS(Number(product.price.replace("$", "")))}</p>
                     </div>
                     <span className="text-sm inline-flex items-center gap-1 text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">
                       {t.viewProduct}
