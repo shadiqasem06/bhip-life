@@ -75,7 +75,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" dir="ltr" className={fontClass}>
-      <body>
+      <body className="overflow-x-hidden">
         <LanguageProvider>
           <AuthProvider>
             <LanguageWrapper>

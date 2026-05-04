@@ -105,13 +105,13 @@ export default function CartPage() {
   const totalPrice = Math.round((subtotal - discountAmount) * 100) / 100;
 
   return (
-    <main className="min-h-screen px-6 py-16">
-      <section className="max-w-5xl mx-auto">
-        <h1 className="font-display text-4xl md:text-5xl mb-10">{t.yourCart}</h1>
+    <main className="min-h-screen w-full px-4 sm:px-6 py-12 md:py-16">
+      <section className="max-w-3xl mx-auto w-full">
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl mb-8">{t.yourCart}</h1>
 
         {cartItems.length === 0 ? (
-          <div className="card rounded-2xl p-12 text-center">
-            <div className="w-16 h-16 rounded-full bg-[var(--accent-soft)] text-[var(--accent)] flex items-center justify-center text-2xl mx-auto mb-4">
+          <div className="card rounded-2xl p-10 text-center">
+            <div className="w-14 h-14 rounded-full bg-[var(--accent-soft)] text-[var(--accent)] flex items-center justify-center text-2xl mx-auto mb-4">
               <FiShoppingBag />
             </div>
             <p className="text-[var(--text-secondary)] mb-6">{t.emptyCart}</p>
@@ -120,30 +120,33 @@ export default function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid lg:grid-cols-[1fr_360px] gap-8 items-start">
-            <div className="space-y-4">
+          <div className="flex flex-col gap-6">
+            {/* Items */}
+            <div className="space-y-3">
               {cartItems.map((item, index) => (
-                <div key={`${item.id}-${index}`} className="card rounded-2xl p-5 flex gap-4 items-center">
-                  <div className="w-20 h-20 shrink-0 rounded-xl bg-gradient-to-br from-amber-900/30 to-transparent flex items-center justify-center">
-                    <span className="font-display text-3xl text-white/90">{item.name.charAt(0)}</span>
+                <div key={`${item.id}-${index}`} className="card rounded-2xl p-4 flex gap-3 items-center w-full min-w-0">
+                  <div className="w-14 h-14 shrink-0 rounded-xl bg-gradient-to-br from-amber-900/30 to-transparent flex items-center justify-center">
+                    <span className="font-display text-2xl text-white/90">{item.name.charAt(0)}</span>
                   </div>
+
                   <div className="flex-1 min-w-0">
-                    <h2 className="font-display text-xl mb-1 truncate">{item.name}</h2>
-                    <p className="text-[var(--text-muted)] text-sm mb-3 truncate">{item.description}</p>
-                    <p className="text-[var(--accent)] font-semibold">{item.price}</p>
+                    <h2 className="font-display text-lg leading-tight mb-0.5 truncate">{item.name}</h2>
+                    <p className="text-[var(--text-muted)] text-xs mb-1.5 truncate">{item.description}</p>
+                    <p className="text-[var(--accent)] font-semibold text-sm">{item.price}</p>
                   </div>
-                  <div className="flex flex-col items-end gap-3 shrink-0">
-                    <div className="flex items-center gap-2 border border-[var(--border)] rounded-full px-1 py-1">
+
+                  <div className="flex flex-col items-end gap-2 shrink-0">
+                    <div className="flex items-center gap-1 border border-[var(--border)] rounded-full px-1 py-0.5">
                       <button onClick={() => decreaseQty(index)} aria-label="decrease" className="w-7 h-7 rounded-full hover:bg-[var(--bg-elevated)] flex items-center justify-center transition-colors">
-                        <FiMinus size={14} />
+                        <FiMinus size={12} />
                       </button>
-                      <span className="font-semibold w-6 text-center text-sm">{item.quantity}</span>
+                      <span className="font-semibold w-5 text-center text-sm">{item.quantity}</span>
                       <button onClick={() => increaseQty(index)} aria-label="increase" className="w-7 h-7 rounded-full hover:bg-[var(--bg-elevated)] flex items-center justify-center transition-colors">
-                        <FiPlus size={14} />
+                        <FiPlus size={12} />
                       </button>
                     </div>
                     <button onClick={() => removeItem(index)} className="text-xs text-[var(--text-muted)] hover:text-[var(--danger)] inline-flex items-center gap-1 transition-colors">
-                      <FiTrash2 size={12} />
+                      <FiTrash2 size={11} />
                       {t.remove}
                     </button>
                   </div>
@@ -151,25 +154,26 @@ export default function CartPage() {
               ))}
             </div>
 
-            <aside className="card rounded-2xl p-6 lg:sticky lg:top-24">
-              <h2 className="font-display text-2xl mb-5">{t.total}</h2>
+            {/* Summary */}
+            <div className="card rounded-2xl p-5 w-full">
+              <h2 className="font-display text-xl mb-4">{t.total}</h2>
 
               {hasDiscount && (
-                <div className="flex items-center gap-2 bg-[var(--accent-soft)] border border-[var(--accent)]/30 rounded-xl px-3 py-2.5 mb-4">
-                  <FiTag className="text-[var(--accent)] shrink-0" size={14} />
+                <div className="flex items-center gap-2 bg-[var(--accent-soft)] border border-[var(--accent)]/30 rounded-xl px-3 py-2 mb-3">
+                  <FiTag className="text-[var(--accent)] shrink-0" size={13} />
                   <span className="text-xs font-medium text-[var(--accent)]">{t.discountBanner}</span>
                 </div>
               )}
 
               {!user && cartItems.length > 0 && (
-                <Link href="/auth/signup" className="flex items-start gap-2 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-xl px-3 py-2.5 mb-4 hover:border-[var(--accent)]/40 transition-colors">
-                  <FiLogIn className="text-[var(--accent)] shrink-0 mt-0.5" size={14} />
+                <Link href="/auth/signup" className="flex items-start gap-2 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-xl px-3 py-2 mb-3 hover:border-[var(--accent)]/40 transition-colors">
+                  <FiLogIn className="text-[var(--accent)] shrink-0 mt-0.5" size={13} />
                   <span className="text-xs text-[var(--text-secondary)] leading-relaxed">{t.loginForDiscount}</span>
                 </Link>
               )}
 
               {hasDiscount && (
-                <div className="space-y-2 mb-4 text-sm">
+                <div className="space-y-1.5 mb-3 text-sm">
                   <div className="flex justify-between text-[var(--text-secondary)]">
                     <span>{t.orderSummary}</span>
                     <span>${subtotal}</span>
@@ -181,21 +185,21 @@ export default function CartPage() {
                 </div>
               )}
 
-              <p className="text-4xl font-semibold text-[var(--accent)] mb-1">${totalPrice}</p>
-              <p className="text-sm text-[var(--text-muted)] mb-6">{"~ " + toILS(totalPrice)}</p>
+              <p className="text-3xl font-semibold text-[var(--accent)] mb-0.5">${totalPrice}</p>
+              <p className="text-sm text-[var(--text-muted)] mb-4">{"~ " + toILS(totalPrice)}</p>
 
-              <div className="divider-gold mb-6" />
+              <div className="divider-gold mb-4" />
 
               <div className="flex flex-col gap-3">
-                <Link href="/checkout" className="btn-primary px-6 py-3 rounded-full text-center">
+                <Link href="/checkout" className="btn-primary px-6 py-3 rounded-full text-center text-sm font-semibold">
                   {t.checkout}
                 </Link>
-                <button onClick={clearCart} className="text-sm text-[var(--text-muted)] hover:text-[var(--danger)] inline-flex items-center justify-center gap-2 py-2 transition-colors">
-                  <FiTrash2 size={14} />
+                <button onClick={clearCart} className="text-sm text-[var(--text-muted)] hover:text-[var(--danger)] inline-flex items-center justify-center gap-2 py-1 transition-colors">
+                  <FiTrash2 size={13} />
                   {t.clearCart}
                 </button>
               </div>
-            </aside>
+            </div>
           </div>
         )}
       </section>
