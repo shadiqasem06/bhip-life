@@ -42,22 +42,22 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: "bhip life — Premium Wellness",
+  title: "PureLife — Premium Wellness",
   description:
     "מוצרי בריאות ולייפסטייל פרימיום. B-YNG, X-GRN ו-INDIGO — כי אתה לא מוכן להתפשר. משלוח מהיר לכל הארץ.",
-  keywords: "bhip life, ויטמינים, תוספי תזונה, קולגן, אנרגיה, ספירולינה, בריאות, לייפסטייל",
-  authors: [{ name: "bhip life" }],
+  keywords: "PureLife, ויטמינים, תוספי תזונה, קולגן, אנרגיה, ספירולינה, בריאות, לייפסטייל",
+  authors: [{ name: "PureLife" }],
   openGraph: {
-    title: "bhip life — Premium Wellness",
+    title: "PureLife — Premium Wellness",
     description: "מוצרי בריאות ולייפסטייל פרימיום. B-YNG, X-GRN ו-INDIGO.",
-    url: "https://bhiplife.com",
-    siteName: "bhip life",
+    url: "https://purelife.com",
+    siteName: "PureLife",
     locale: "he_IL",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "bhip life — Premium Wellness",
+    title: "PureLife — Premium Wellness",
     description: "מוצרי בריאות ולייפסטייל פרימיום.",
   },
   icons: {

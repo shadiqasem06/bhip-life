@@ -22,9 +22,9 @@ type AuthContextType = {
   markDiscountUsed: () => void;
 };
 
-const AUTH_EVENT = "bhip-auth-updated";
-const USERS_KEY = "bhip-users";
-const SESSION_KEY = "bhip-session";
+const AUTH_EVENT = "purelife-auth-updated";
+const USERS_KEY = "purelife-users";
+const SESSION_KEY = "purelife-session";
 
 type StoredUser = User & { passwordHash: string };
 

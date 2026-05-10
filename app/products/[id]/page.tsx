@@ -128,7 +128,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
           {/* Details */}
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)] mb-1">bhip life</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)] mb-1">PureLife</p>
             <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)] mb-3">{product.tag}</p>
             <h1 className="font-display text-4xl md:text-5xl mb-3">{product.name}</h1>
 

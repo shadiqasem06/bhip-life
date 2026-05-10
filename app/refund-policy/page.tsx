@@ -65,10 +65,10 @@ export default function RefundPolicyPage() {
             <p>
               <span className="text-[var(--text-muted)]">{t.refundContactEmail}: </span>
               <a
-                href="mailto:info@bhiplife.com"
+                href="mailto:info@purelife.com"
                 className="text-[var(--accent)] hover:underline"
               >
-                info@bhiplife.com
+                info@purelife.com
               </a>
             </p>
             <p>

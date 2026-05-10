@@ -48,7 +48,7 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-block mb-6">
             <span className="font-display text-3xl">
-              bhip <span className="text-gradient-gold">life</span>
+              Pure<span className="text-gradient-gold">Life</span>
             </span>
           </Link>
           <h1 className="font-display text-3xl md:text-4xl mb-2">

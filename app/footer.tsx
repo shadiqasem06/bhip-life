@@ -19,7 +19,7 @@ export default function Footer() {
         {/* BRAND */}
         <div>
           <h2 className="font-display text-3xl mb-3">
-            bhip <span className="text-gradient-gold">life</span>
+            Pure<span className="text-gradient-gold">Life</span>
           </h2>
           <p className="text-[var(--text-secondary)] leading-relaxed max-w-xs">
             {t.footerTagline}
@@ -74,10 +74,10 @@ export default function Footer() {
             <p>
               <span className="text-[var(--text-muted)]">{t.footerEmail}: </span>
               <a
-                href="mailto:info@bhiplife.com"
+                href="mailto:info@purelife.com"
                 className="hover:text-[var(--text-primary)] transition-colors"
               >
-                info@bhiplife.com
+                info@purelife.com
               </a>
             </p>
             <p>
@@ -97,7 +97,7 @@ export default function Footer() {
           </h3>
           <div className="flex gap-3">
             <a
-              href="https://instagram.com/bhiplife.fit"
+              href="https://instagram.com/purelifefit"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -120,7 +120,7 @@ export default function Footer() {
 
       <div className="border-t border-[var(--border)]">
         <div className="max-w-6xl mx-auto px-6 py-5 text-center text-sm text-[var(--text-muted)]">
-          © {year} bhip life. {t.footerRights}
+          © {year} PureLife. {t.footerRights}
         </div>
       </div>
     </footer>

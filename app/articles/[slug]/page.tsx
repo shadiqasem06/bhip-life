@@ -190,7 +190,7 @@ export default function ArticlePage({
           >
             <div>
               <p className="text-xs uppercase tracking-widest mb-1" style={{ color: article.accentColor }}>
-                bhip life
+                PureLife
               </p>
               <h3 className="font-display text-xl">
                 {article.product} — {article.excerpt[l].split(":")[0]}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Script from "next/script";
 import Link from "next/link";
 import { FiTag, FiLogIn, FiCheck, FiX, FiLock, FiArrowRight } from "react-icons/fi";
 import { useCart } from "../context/cart-context";
@@ -17,8 +18,8 @@ type Product = {
 };
 
 const PROMO_CODES: Record<string, number> = {
-  BHIP10: 0.10, BHIP20: 0.20, SAVE15: 0.15,
-  bhip10: 0.10, bhip20: 0.20, save15: 0.15,
+  PURE10: 0.10, PURE20: 0.20, SAVE15: 0.15,
+  pure10: 0.10, pure20: 0.20, save15: 0.15,
 };
 
 const parsePrice = (price: string) => Number(price.replace("$", "").replace("₪", "")) || 0;
@@ -123,6 +124,11 @@ export default function CheckoutPage() {
   };
 
   return (
+    <>
+    <Script
+      src="https://direct.tranzila.com/tzlassets/tl-iframe.js"
+      strategy="lazyOnload"
+    />
     <main className="min-h-screen px-6 py-16">
       <section className="max-w-5xl mx-auto">
         <h1 className="font-display text-4xl md:text-5xl mb-10">{t.checkoutTitle}</h1>
@@ -136,7 +142,7 @@ export default function CheckoutPage() {
               </span>
               <span className="ms-auto text-xs text-[var(--text-muted)]">Total: ${totalPrice}</span>
             </div>
-            <iframe src={iframeUrl} width="100%" height="520" frameBorder="0" title="Tranzila Secure Payment" className="block" allow="payment" />
+            <iframe src={iframeUrl} width="100%" height="520" frameBorder="0" title="Tranzila Secure Payment" className="block" allow="payment; apple-pay" />
             <div className="px-6 py-3 border-t border-[var(--border)] flex justify-center">
               <button onClick={() => setStep("details")} className="text-xs text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
                 {lang === "he" ? "← חזרה לפרטים" : lang === "ar" ? "← العودة إلى التفاصيل" : "← Back to details"}
@@ -148,10 +154,10 @@ export default function CheckoutPage() {
             <div className="card rounded-2xl p-6">
               <h2 className="font-display text-xl mb-5 text-[var(--accent)]">{t.customerDetails}</h2>
               <div className="space-y-3">
-                <input type="text" placeholder={t.fullName} value={fullName} onChange={(e) => setFullName(e.target.value)} dir={isRtl ? "rtl" : "ltr"} className="input w-full p-3 rounded-xl" />
-                <input type="email" placeholder={t.email} value={email} onChange={(e) => setEmail(e.target.value)} dir="ltr" className="input w-full p-3 rounded-xl" />
-                <input type="tel" placeholder={t.phone} value={phone} onChange={(e) => setPhone(e.target.value)} dir="ltr" className="input w-full p-3 rounded-xl" />
-                <input type="text" placeholder={t.address} value={address} onChange={(e) => setAddress(e.target.value)} dir={isRtl ? "rtl" : "ltr"} className="input w-full p-3 rounded-xl" />
+                <input suppressHydrationWarning type="text" placeholder={t.fullName} value={fullName} onChange={(e) => setFullName(e.target.value)} dir={isRtl ? "rtl" : "ltr"} className="input w-full p-3 rounded-xl" />
+                <input suppressHydrationWarning type="email" placeholder={t.email} value={email} onChange={(e) => setEmail(e.target.value)} dir="ltr" className="input w-full p-3 rounded-xl" />
+                <input suppressHydrationWarning type="tel" placeholder={t.phone} value={phone} onChange={(e) => setPhone(e.target.value)} dir="ltr" className="input w-full p-3 rounded-xl" />
+                <input suppressHydrationWarning type="text" placeholder={t.address} value={address} onChange={(e) => setAddress(e.target.value)} dir={isRtl ? "rtl" : "ltr"} className="input w-full p-3 rounded-xl" />
               </div>
             </div>
 
@@ -206,7 +212,7 @@ export default function CheckoutPage() {
                       </div>
                     ) : (
                       <div className="flex gap-2">
-                        <input type="text" placeholder={t.promoPlaceholder} value={promoInput} onChange={(e) => { setPromoInput(e.target.value); setPromoError(""); }} onKeyDown={(e) => e.key === "Enter" && applyPromo()} dir="ltr" className="input flex-1 px-3 py-2.5 rounded-xl text-sm uppercase placeholder:normal-case placeholder:tracking-normal tracking-widest" />
+                        <input suppressHydrationWarning type="text" placeholder={t.promoPlaceholder} value={promoInput} onChange={(e) => { setPromoInput(e.target.value); setPromoError(""); }} onKeyDown={(e) => e.key === "Enter" && applyPromo()} dir="ltr" className="input flex-1 px-3 py-2.5 rounded-xl text-sm uppercase placeholder:normal-case placeholder:tracking-normal tracking-widest" />
                         <button onClick={applyPromo} disabled={!promoInput.trim()} className="btn-outline px-4 py-2.5 rounded-xl text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap">{t.promoApply}</button>
                       </div>
                     )}
@@ -248,5 +254,6 @@ export default function CheckoutPage() {
         )}
       </section>
     </main>
+    </>
   );
 }

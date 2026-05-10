@@ -24,7 +24,7 @@ export default function AboutPage() {
           <div className="relative h-80 rounded-2xl overflow-hidden">
             <Image
               src="/products/hero-group.jpg"
-              alt="bhip life products"
+              alt="PureLife products"
               fill
               className="object-cover object-top"
               sizes="(max-width: 768px) 100vw, 50vw"

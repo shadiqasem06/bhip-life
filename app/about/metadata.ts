@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "אודות — bhip life",
+  title: "אודות — PureLife",
   description:
-    "הכר את bhip life — קהילה של אנשים שאפתניים שבונים הכנסה גמישה ובריאות טובה יחד. הסיפור שלנו, הערכים שלנו.",
+    "הכר את PureLife — קהילה של אנשים שאפתניים שבונים הכנסה גמישה ובריאות טובה יחד. הסיפור שלנו, הערכים שלנו.",
   openGraph: {
-    title: "אודות bhip life",
-    description: "הסיפור, המשימה והערכים של bhip life.",
+    title: "אודות PureLife",
+    description: "הסיפור, המשימה והערכים של PureLife.",
   },
 };

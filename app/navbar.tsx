@@ -36,16 +36,16 @@ export default function Navbar() {
         {/* Logo + desktop links */}
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <Image
-              src="/logo-icon.png"
-              alt="bhip life logo"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo-icon.svg"
+              alt="PureLife logo"
               width={40}
               height={40}
-              priority
               className="object-contain"
             />
             <span className="font-display text-xl tracking-wide">
-              bhip <span className="text-gradient-gold">life</span>
+              Pure<span className="text-gradient-gold">Life</span>
             </span>
           </Link>
 

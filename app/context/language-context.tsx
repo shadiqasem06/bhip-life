@@ -9,7 +9,7 @@ import {
 
 export type Lang = "en" | "he" | "ar";
 
-const LANG_EVENT = "bhip-lang-updated";
+const LANG_EVENT = "purelife-lang-updated";
 const DEFAULT_LANG: Lang = "en";
 
 function subscribe(callback: () => void) {

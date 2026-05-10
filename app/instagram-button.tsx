@@ -10,7 +10,7 @@ export default function InstagramButton() {
 
   return (
     <a
-      href="https://instagram.com/bhiplife.fit"
+      href="https://instagram.com/purelifefit"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Follow us on Instagram"

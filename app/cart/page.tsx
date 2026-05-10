@@ -17,7 +17,7 @@ type CartItem = {
   quantity: number;
 };
 
-const CART_EVENT = "bhip-cart-updated";
+const CART_EVENT = "purelife-cart-updated";
 
 function subscribe(callback: () => void) {
   window.addEventListener("storage", callback);

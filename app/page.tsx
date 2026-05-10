@@ -61,7 +61,7 @@ export default function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden min-h-[65vh] md:min-h-[85vh] [min-height:65dvh] md:[min-height:85dvh] flex items-center">
         <div className="absolute inset-0">
-          <Image src="/products/hero-group.jpg" alt="bhip life products" fill priority className="object-cover object-center" sizes="100vw" />
+          <Image src="/products/hero-group.jpg" alt="PureLife products" fill priority className="object-cover object-center" sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-base)]/60 via-[var(--bg-base)]/50 to-[var(--bg-base)]" />
           <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-base)]/40 via-transparent to-[var(--bg-base)]/40" />
         </div>
@@ -176,7 +176,7 @@ export default function Home() {
           <div className="absolute inset-0 opacity-20"
             style={{ background: "radial-gradient(ellipse at center, rgba(212,175,55,0.3) 0%, transparent 70%)" }} />
           <div className="relative px-6 py-4">
-            <p className="text-xs uppercase tracking-[0.35em] text-[var(--accent)] mb-4">bhip life</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-[var(--accent)] mb-4">PureLife</p>
             <h2 className="font-display text-3xl md:text-6xl mb-5">
               <span className="text-gradient-gold">{t.heroCta}</span>
             </h2>

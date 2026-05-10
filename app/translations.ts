@@ -9,14 +9,14 @@ export const translations = {
 
     // Home / Hero
     heroEyebrow: "Premium Wellness",
-    heroTitle: "Live Better. Live Bhip.",
+    heroTitle: "Live Better. Live PureLife.",
     heroSubtitle:
       "Premium health and lifestyle products crafted for people who refuse to settle.",
     heroCta: "Shop Collection",
     heroCtaSecondary: "Our Story",
 
     // Home / Features
-    featuresTitle: "Why choose bhip life",
+    featuresTitle: "Why choose PureLife",
     featureQualityTitle: "Uncompromising Quality",
     featureQualityText:
       "Every product is sourced from trusted producers and meets the highest wellness standards.",
@@ -43,7 +43,7 @@ export const translations = {
 
     // Products listing
     productsTitle: "Our Products",
-    productsSubtitle: "Discover the best of bhip life",
+    productsSubtitle: "Discover the best of PureLife",
     viewProduct: "View Product",
     addToCart: "Add to Cart",
     buyNow: "Buy Now",
@@ -54,7 +54,7 @@ export const translations = {
     ingredients: "Ingredients",
 
     // About
-    aboutTitle: "About bhip life",
+    aboutTitle: "About PureLife",
     aboutEyebrow: "Our Story",
     aboutWho: "Who We Are",
     aboutText1:
@@ -113,7 +113,7 @@ export const translations = {
     signInTitle: "Welcome Back",
     signInSubtitle: "Sign in to your account",
     signUpTitle: "Create Account",
-    signUpSubtitle: "Join bhip life and get 15% off your first order",
+    signUpSubtitle: "Join PureLife and get 15% off your first order",
     fullNameLabel: "Full Name",
     emailLabel: "Email",
     passwordLabel: "Password",
@@ -219,11 +219,11 @@ export const translations = {
     refundPolicyNav: "Refund Policy",
     refundPolicyTitle: "Returns & Cancellations Policy",
     refundPolicyEyebrow: "Consumer Rights",
-    refundPolicyIntro: "At bhip life, we are committed to your satisfaction. This policy is written in accordance with the Israeli Consumer Protection Law (5741-1981) and the Consumer Protection Regulations (Transaction Cancellation) 5771-2010.",
+    refundPolicyIntro: "At PureLife, we are committed to your satisfaction. This policy is written in accordance with the Israeli Consumer Protection Law (5741-1981) and the Consumer Protection Regulations (Transaction Cancellation) 5771-2010.",
     refundSection1Title: "Right to Cancel",
     refundSection1Text: "You may cancel any online purchase within 14 business days from the date of delivery, provided the product is unopened and in its original sealed packaging. Since our products are dietary supplements (food products), cancellations cannot be accepted once the packaging has been opened, for health and safety reasons.",
     refundSection2Title: "How to Request a Cancellation",
-    refundSection2Text: "To request a cancellation, please contact us by email at info@bhiplife.com or by phone at 054-250-8596, stating your full name, order number, and reason for cancellation. We will respond within 1–2 business days.",
+    refundSection2Text: "To request a cancellation, please contact us by email at info@purelife.com or by phone at 054-250-8596, stating your full name, order number, and reason for cancellation. We will respond within 1–2 business days.",
     refundSection3Title: "Refund Process",
     refundSection3Text: "Upon approval of your cancellation request, a refund will be issued to your original payment method within 14 business days. A cancellation fee of up to 5% of the product price or 100 ILS (whichever is lower) may apply, in accordance with the law.",
     refundSection4Title: "Defective or Incorrect Products",
@@ -247,14 +247,14 @@ export const translations = {
 
     // Home / Hero
     heroEyebrow: "בריאות פרימיום",
-    heroTitle: "לחיות טוב יותר. לחיות Bhip.",
+    heroTitle: "לחיות טוב יותר. לחיות PureLife.",
     heroSubtitle:
       "מוצרי בריאות ולייפסטייל פרימיום, לאנשים שלא מוכנים להתפשר.",
     heroCta: "לקולקציה",
     heroCtaSecondary: "הסיפור שלנו",
 
     // Home / Features
-    featuresTitle: "למה לבחור ב-bhip life",
+    featuresTitle: "למה לבחור ב-PureLife",
     featureQualityTitle: "איכות ללא פשרות",
     featureQualityText:
       "כל מוצר נבחר ממפיקים אמינים ועומד בסטנדרטים הגבוהים ביותר.",
@@ -281,7 +281,7 @@ export const translations = {
 
     // Products listing
     productsTitle: "המוצרים שלנו",
-    productsSubtitle: "גלה את המוצרים של bhip life",
+    productsSubtitle: "גלה את המוצרים של PureLife",
     viewProduct: "צפה במוצר",
     addToCart: "הוסף לעגלה",
     buyNow: "קנה עכשיו",
@@ -292,7 +292,7 @@ export const translations = {
     ingredients: "רכיבים",
 
     // About
-    aboutTitle: "אודות bhip life",
+    aboutTitle: "אודות PureLife",
     aboutEyebrow: "הסיפור שלנו",
     aboutWho: "מי אנחנו",
     aboutText1:
@@ -349,7 +349,7 @@ export const translations = {
     signInTitle: "ברוך השב",
     signInSubtitle: "התחבר לחשבון שלך",
     signUpTitle: "יצירת חשבון",
-    signUpSubtitle: "הצטרף ל-bhip life וקבל 15% הנחה על ההזמנה הראשונה",
+    signUpSubtitle: "הצטרף ל-PureLife וקבל 15% הנחה על ההזמנה הראשונה",
     fullNameLabel: "שם מלא",
     emailLabel: "אימייל",
     passwordLabel: "סיסמה",
@@ -455,11 +455,11 @@ export const translations = {
     refundPolicyNav: "מדיניות החזרים",
     refundPolicyTitle: "מדיניות החזרים וביטולים",
     refundPolicyEyebrow: "זכויות צרכן",
-    refundPolicyIntro: "ב-bhip life אנחנו מחויבים לשביעות רצונך. מדיניות זו נכתבה בהתאם לחוק הגנת הצרכן, התשמ\"א-1981, ותקנות הגנת הצרכן (ביטול עסקה), תשע\"א-2010.",
+    refundPolicyIntro: "ב-PureLife אנחנו מחויבים לשביעות רצונך. מדיניות זו נכתבה בהתאם לחוק הגנת הצרכן, התשמ\"א-1981, ותקנות הגנת הצרכן (ביטול עסקה), תשע\"א-2010.",
     refundSection1Title: "זכות ביטול עסקה",
     refundSection1Text: "ניתן לבטל כל רכישה מקוונת תוך 14 ימי עסקים ממועד קבלת המוצר, בתנאי שהמוצר לא נפתח ונמצא באריזתו המקורית הסגורה. מאחר שמוצרינו הם תוספי תזונה (מוצרי מזון), לא ניתן לבטל עסקה לאחר פתיחת האריזה, מטעמי בריאות והיגיינה.",
     refundSection2Title: "כיצד לבקש ביטול",
-    refundSection2Text: "לבקשת ביטול עסקה, אנא פנה אלינו בדוא\"ל info@bhiplife.com או בטלפון 054-250-8596, תוך ציון שמך המלא, מספר ההזמנה וסיבת הביטול. נחזור אליך תוך 1–2 ימי עסקים.",
+    refundSection2Text: "לבקשת ביטול עסקה, אנא פנה אלינו בדוא\"ל info@purelife.com או בטלפון 054-250-8596, תוך ציון שמך המלא, מספר ההזמנה וסיבת הביטול. נחזור אליך תוך 1–2 ימי עסקים.",
     refundSection3Title: "החזר כספי",
     refundSection3Text: "עם אישור בקשת הביטול, יינתן החזר כספי לאמצעי התשלום המקורי תוך 14 ימי עסקים. בהתאם לחוק, עשוי להיגבות דמי ביטול בשיעור של עד 5% ממחיר המוצר או 100 ₪ — לפי הנמוך מביניהם.",
     refundSection4Title: "מוצר פגום או שגוי",
@@ -483,14 +483,14 @@ export const translations = {
 
     // Home / Hero
     heroEyebrow: "عافية فاخرة",
-    heroTitle: "عِش أفضل. عِش Bhip.",
+    heroTitle: "عِش أفضل. عِش PureLife.",
     heroSubtitle:
       "منتجات صحية وأسلوب حياة فاخرة لمن لا يقبلون أقل من الأفضل.",
     heroCta: "تسوّق الآن",
     heroCtaSecondary: "قصّتنا",
 
     // Home / Features
-    featuresTitle: "لماذا bhip life",
+    featuresTitle: "لماذا PureLife",
     featureQualityTitle: "جودة بلا تنازلات",
     featureQualityText:
       "كل منتج مُختار بعناية من مُنتجين موثوقين ويلبي أعلى معايير الجودة.",
@@ -517,7 +517,7 @@ export const translations = {
 
     // Products listing
     productsTitle: "منتجاتنا",
-    productsSubtitle: "اكتشف أفضل منتجات bhip life",
+    productsSubtitle: "اكتشف أفضل منتجات PureLife",
     viewProduct: "عرض المنتج",
     addToCart: "أضف إلى السلة",
     buyNow: "اشترِ الآن",
@@ -528,7 +528,7 @@ export const translations = {
     ingredients: "المكونات",
 
     // About
-    aboutTitle: "حول bhip life",
+    aboutTitle: "حول PureLife",
     aboutEyebrow: "قصّتنا",
     aboutWho: "من نحن",
     aboutText1:
@@ -585,7 +585,7 @@ export const translations = {
     signInTitle: "أهلاً بعودتك",
     signInSubtitle: "سجّل دخولك إلى حسابك",
     signUpTitle: "إنشاء حساب",
-    signUpSubtitle: "انضم إلى bhip life واحصل على خصم 15% على أول طلب",
+    signUpSubtitle: "انضم إلى PureLife واحصل على خصم 15% على أول طلب",
     fullNameLabel: "الاسم الكامل",
     emailLabel: "البريد الإلكتروني",
     passwordLabel: "كلمة المرور",
@@ -691,11 +691,11 @@ export const translations = {
     refundPolicyNav: "سياسة الإرجاع",
     refundPolicyTitle: "سياسة الإرجاع والإلغاء",
     refundPolicyEyebrow: "حقوق المستهلك",
-    refundPolicyIntro: "في bhip life، نحن ملتزمون برضاك التام. تم كتابة هذه السياسة وفقاً لقانون حماية المستهلك الإسرائيلي (5741-1981) ولوائح حماية المستهلك (إلغاء المعاملات) 5771-2010.",
+    refundPolicyIntro: "في PureLife، نحن ملتزمون برضاك التام. تم كتابة هذه السياسة وفقاً لقانون حماية المستهلك الإسرائيلي (5741-1981) ولوائح حماية المستهلك (إلغاء المعاملات) 5771-2010.",
     refundSection1Title: "حق الإلغاء",
     refundSection1Text: "يمكنك إلغاء أي عملية شراء عبر الإنترنت خلال 14 يوم عمل من تاريخ استلام المنتج، بشرط أن يكون المنتج غير مفتوح وفي عبوته الأصلية المغلقة. نظراً لأن منتجاتنا مكملات غذائية (منتجات غذائية)، لا يمكن قبول الإلغاءات بعد فتح العبوة لأسباب صحية وأمنية.",
     refundSection2Title: "كيفية طلب الإلغاء",
-    refundSection2Text: "لطلب الإلغاء، يرجى التواصل معنا عبر البريد الإلكتروني info@bhiplife.com أو الهاتف 054-250-8596، مع ذكر اسمك الكامل ورقم الطلب وسبب الإلغاء. سنرد عليك خلال 1–2 يوم عمل.",
+    refundSection2Text: "لطلب الإلغاء، يرجى التواصل معنا عبر البريد الإلكتروني info@purelife.com أو الهاتف 054-250-8596، مع ذكر اسمك الكامل ورقم الطلب وسبب الإلغاء. سنرد عليك خلال 1–2 يوم عمل.",
     refundSection3Title: "عملية الاسترداد",
     refundSection3Text: "عند الموافقة على طلب الإلغاء، سيتم رد المبلغ إلى وسيلة الدفع الأصلية خلال 14 يوم عمل. قد تُطبَّق رسوم إلغاء تصل إلى 5% من سعر المنتج أو 100 شيكل (أيهما أقل)، وفقاً للقانون.",
     refundSection4Title: "منتج معيب أو خاطئ",
