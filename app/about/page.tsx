@@ -68,6 +68,21 @@ export default function AboutPage() {
             text={t.lifestyleText}
           />
         </div>
+
+        {/* Work From Home Form */}
+        <div className="mt-16 rounded-2xl overflow-hidden border border-[var(--border)] shadow-lg">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSccqF_XYAzJ7AeTJQ0LgTm5f328K9Wse42WsUSzA93iMMoNfw/viewform?embedded=true"
+            width="100%"
+            height="700"
+            frameBorder="0"
+            marginHeight={0}
+            marginWidth={0}
+            title="دخل اضافي من البيت"
+          >
+            טוען…
+          </iframe>
+        </div>
       </section>
     </main>
   );
