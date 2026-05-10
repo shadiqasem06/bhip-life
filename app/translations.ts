@@ -25,7 +25,7 @@ export const translations = {
       "Your order ships quickly, fully tracked, all the way to your door.",
     featureTrustTitle: "Secure Checkout",
     featureTrustText:
-      "Protected payments via Stripe. Your data stays yours — always.",
+      "Protected payments via Tranzila. Your data stays yours — always.",
 
     // Home / Featured products
     featuredTitle: "Featured Products",
@@ -263,7 +263,7 @@ export const translations = {
       "ההזמנה שלך יוצאת במהירות עם מעקב מלא עד הדלת שלך.",
     featureTrustTitle: "תשלום מאובטח",
     featureTrustText:
-      "תשלומים מוגנים דרך Stripe. המידע שלך נשאר שלך — תמיד.",
+      "תשלומים מוגנים דרך Tranzila. המידע שלך נשאר שלך — תמיד.",
 
     // Home / Featured products
     featuredTitle: "מוצרים נבחרים",
@@ -499,7 +499,7 @@ export const translations = {
       "طلبك يصل إليك بسرعة، مع تتبع كامل حتى باب بيتك.",
     featureTrustTitle: "دفع آمن",
     featureTrustText:
-      "مدفوعات محمية عبر Stripe. بياناتك تبقى ملكك دائمًا.",
+      "مدفوعات محمية عبر Tranzila. بياناتك تبقى ملكك دائمًا.",
 
     // Home / Featured products
     featuredTitle: "منتجات مميزة",
