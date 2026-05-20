@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FiShoppingBag, FiMenu, FiX, FiGlobe, FiUser, FiLogOut, FiLogIn } from "react-icons/fi";
+import { FiShoppingBag, FiMenu, FiX, FiGlobe, FiUser, FiLogOut, FiLogIn, FiSettings } from "react-icons/fi";
 import { useCart } from "./context/cart-context";
 import { useLanguage } from "./context/language-context";
 import { useAuth } from "./context/auth-context";
@@ -95,6 +95,15 @@ export default function Navbar() {
                 </div>
                 <span className="max-w-[120px] truncate">{t.hello}, {user.name.split(" ")[0]}</span>
               </div>
+              {user.isAdmin && (
+                <Link
+                  href="/admin"
+                  className="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] inline-flex items-center gap-1.5 transition-colors"
+                  title="Admin Panel"
+                >
+                  <FiSettings size={15} />
+                </Link>
+              )}
               <button
                 onClick={signOut}
                 className="text-sm text-[var(--text-muted)] hover:text-[var(--danger)] inline-flex items-center gap-1.5 transition-colors"
@@ -209,6 +218,16 @@ export default function Navbar() {
                     </div>
                     <span className="truncate">{t.hello}, {user.name.split(" ")[0]}</span>
                   </div>
+                  {user.isAdmin && (
+                    <Link
+                      href="/admin"
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center gap-2 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+                    >
+                      <FiSettings size={15} />
+                      Admin Panel
+                    </Link>
+                  )}
                   <button
                     onClick={() => { signOut(); setMenuOpen(false); }}
                     className="flex items-center gap-2 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--danger)] transition-colors"

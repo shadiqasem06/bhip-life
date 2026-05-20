@@ -40,7 +40,7 @@ export default function SignUpPage() {
     }
 
     setLoading(true);
-    const result = signUp(name, email, password);
+    const result = await signUp(name, email, password);
     setLoading(false);
 
     if (!result.ok) {

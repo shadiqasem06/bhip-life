@@ -30,7 +30,7 @@ export default function LoginPage() {
     }
 
     setLoading(true);
-    const result = signIn(email, password);
+    const result = await signIn(email, password);
     setLoading(false);
 
     if (!result.ok) {

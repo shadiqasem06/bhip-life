@@ -106,11 +106,23 @@ export default function CheckoutPage() {
           address,
           successUrl: origin + "/success",
           failUrl: origin + "/checkout?error=1",
+          // Order data for Supabase
+          items: cartItems.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: parsePrice(item.price),
+            quantity: item.quantity || 1,
+          })),
+          subtotal,
+          discountAmount,
+          promoCode: appliedPromo?.code ?? null,
+          promoAmount,
+          userId: user?.id ?? null,
         }),
       });
       const data = await res.json();
       if (data.iframeUrl) {
-        markDiscountUsed?.();
+        await markDiscountUsed?.();
         setIframeUrl(data.iframeUrl);
         setStep("payment");
       } else {
@@ -242,15 +254,13 @@ export default function CheckoutPage() {
                     <span>{loadingPayment ? (lang === "he" ? "טוען..." : lang === "ar" ? "جارٍ التحميل..." : "Loading...") : t.payNow}</span>
                     {!loadingPayment && <FiArrowRight size={15} className={isRtl ? "rtl-flip" : ""} />}
                   </button>
-
-                  <p className="text-center text-xs text-[var(--text-muted)] mt-3 flex items-center justify-center gap-1">
-                    <FiLock size={11} />
-                    {lang === "he" ? "תשלום מאובטח דרך Tranzila" : lang === "ar" ? "دفع آمن عبر Tranzila" : "Secured by Tranzila"}
+                  <p className="text-center text-xs text-[var(--text-muted)] mt-3">
+                    {lang === "he" ? "תשלום מאובטח עם Tranzila" : lang === "ar" ? "دفع آمن مع Tranzila" : "Secured by Tranzila"}
                   </p>
-                </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
+        </div>
         )}
       </section>
     </main>
