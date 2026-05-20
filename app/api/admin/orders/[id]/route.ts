@@ -3,9 +3,10 @@ import { createServerClient } from "@/lib/supabase-server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const { status } = await req.json();
     const validStatuses = ["pending", "paid", "shipped", "delivered", "cancelled"];
     if (!validStatuses.includes(status)) {
@@ -16,12 +17,10 @@ export async function PATCH(
     const { error } = await sb
       .from("orders")
       .update({ status })
-      .eq("id", params.id);
+      .eq("id", id);
 
     if (error) throw error;
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("Admin order update error:", err);
-    return NextResponse.json({ error: "Failed to update order" }, { status: 500 });
-  }
-}
+    return NextResponse.json({ error: "Failed to update
